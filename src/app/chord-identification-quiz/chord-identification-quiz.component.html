@@ -1,0 +1,15 @@
+<h2>Guess the Chord</h2>
+
+<p>Listen to the chord and identify its type and root:</p>
+<button (click)="playCurrentChord()">Play Again</button>
+
+<div *ngIf="options.length > 0">
+    <button *ngFor="let option of options" (click)="selectAnswer(option)" [class.selected]="userAnswer === option">
+        {{ option.rootNote }} {{ option.type }}
+    </button>
+</div>
+
+<button (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
+
+<p>{{ message }}</p>
+<p>Score: {{ score }}</p>

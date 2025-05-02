@@ -1,0 +1,34 @@
+<div *ngIf="showHint">
+    <a (click)="showHint = false">Hide hint</a>
+    <h3>Interwały</h3>
+
+    <ul>
+        <li>A - pryma </li>
+        <li>A# - (1) sekunda mała - minor second, m2</li>
+        <li>B - (2) sekunda wielka - major second, M2</li>
+        <li>C - (3) tercja mała - minor third, m3</li>
+        <li>C# - (4) tercja wielka - major third, M3,</li>
+        <li>D - (5) kwarta czysta - perfect fourth, P4</li>
+        <li>D# - (6) tryton - T </li>
+        <li>E - (7) kwinta czysta - perfect fifith, P5</li>
+        <li>F - (8) seksta mała - minor sixth, m6</li>
+        <li>F# - (9) seksta wielka - major sixth, M6</li>
+        <li>G - (10) septyma małą - minor seven, m7</li>
+        <li>G# - (11) septyma wielka - major seven, M7</li>
+    </ul>
+</div>
+<a *ngIf="showHint == false" (click)="showHint = true">Show hint</a>
+<h2>Guess the Interval</h2>
+
+<p>Identify the interval between: <strong>{{ note1?.name }}</strong> and <strong>{{ note2?.name }}</strong></p>
+
+<div *ngIf="options.length > 0">
+    <button *ngFor="let option of options" (click)="selectAnswer(option)" [class.selected]="userAnswer === option">
+        {{ option.name }}
+    </button>
+</div>
+
+<button (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
+
+<p>{{ message }}</p>
+<p>Score: {{ score }}</p>

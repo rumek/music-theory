@@ -1,0 +1,15 @@
+<h2>Guess the Sound</h2>
+
+<p>Listen to the note and identify it:</p>
+<button (click)="playCurrentNote()">Play Again</button>
+
+<div *ngIf="options.length > 0">
+    <button *ngFor="let option of options" (click)="selectAnswer(option)" [class.selected]="userAnswer === option">
+        {{ option.name }}
+    </button>
+</div>
+
+<button (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
+
+<p>{{ message }}</p>
+<p>Score: {{ score }}</p>

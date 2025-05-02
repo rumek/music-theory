@@ -1,0 +1,27 @@
+<div *ngIf="showHint">
+    <a (click)="showHint = false">Hide hint</a>
+    <h3>Trójdźwieki molowe:</h3>
+    <p>Pryma - tercja mała - kwinta czysta/tercja wielka od poprzedniego składnika akordu</p>
+
+    <h3>Trójdźwieki durowe:</h3>
+    <p>Pryma - tercja wielka - kwinta czysta/tercja mała od poprzedniego składnika akordu</p>
+
+</div>
+<a *ngIf="showHint == false" (click)="showHint = true">Show hint</a>
+
+<hr>
+<h2>Identify the Notes in the Chord</h2>
+
+<p>What notes form a <strong>{{ currentRootNote?.name }} {{ currentChordDefinition?.type }}</strong> chord?</p>
+
+<div *ngIf="chordOptions.length > 0">
+    <button *ngFor="let option of chordOptions; let i = index" (click)="selectAnswer(option)"
+        [class.selected]="userAnswer === option">
+        {{ currentRootNote?.name }} {{ option.notes.slice(1).join(' ') }}
+    </button>
+</div>
+
+<button (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
+
+<p>{{ message }}</p>
+<p>Score: {{ score }}</p>

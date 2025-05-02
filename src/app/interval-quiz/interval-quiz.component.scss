@@ -1,0 +1,16 @@
+/* Basic styling - feel free to expand */
+button {
+    padding: 8px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .selected {
+    background-color: lightblue;
+  }
+
+  a {
+    display: block;
+    cursor: pointer;
+    text-decoration: underline;
+  }
