@@ -22,13 +22,16 @@
 
 <p>Identify the interval between: <strong>{{ note1?.name }}</strong> and <strong>{{ note2?.name }}</strong></p>
 
+<app-freatboard [highlightedNotes]="[note1!, note2!]"></app-freatboard>
+
 <div *ngIf="options.length > 0">
-    <button *ngFor="let option of options" (click)="selectAnswer(option)" [class.selected]="userAnswer === option">
+    <button class="answer-btn" *ngFor="let option of options" (click)="selectAnswer(option)"
+        [class.selected]="userAnswer === option">
         {{ option.name }}
     </button>
 </div>
 
-<button (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
+<button class="submit-btn" (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
 
 <p>{{ message }}</p>
 <p>Score: {{ score }}</p>
