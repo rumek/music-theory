@@ -1,0 +1,24 @@
+<div>
+    <h3>Guitar Fretboard Representation</h3>
+    <input type="checkbox" [ngModel]="showFretboard" (change)="showFretboard = !showFretboard">
+    Show fretboard
+    <ng-container *ngIf="showFretboard">
+        <label>
+            <input type="checkbox" [ngModel]="showAllNotes" (change)="showAllNotes = !showAllNotes">
+            Show All Notes
+        </label>
+        <div class="fretboard">
+            <div class="string" *ngFor="let stringNote of guitarStrings; let i = index">
+                <div class="fret" *ngFor="let fret of frets; let j = index" [class.fret-0]="j === 0">
+                    <div class="note" *ngIf="showAllNotes || isHighlighted(stringNote, fret)"
+                        [class.highlighted]="isHighlighted(stringNote, fret)">
+                        {{ getNoteOnFret(stringNote, fret) }}
+                    </div>
+                </div>
+            </div>
+            <div class="fret-numbers">
+                <div class="fret-number" *ngFor="let fret of frets">{{ fret }}</div>
+            </div>
+        </div>
+    </ng-container>
+</div>

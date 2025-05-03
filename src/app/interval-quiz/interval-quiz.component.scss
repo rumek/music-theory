@@ -1,16 +1,87 @@
 /* Basic styling - feel free to expand */
 button {
-    padding: 8px 15px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .selected {
-    background-color: lightblue;
-  }
+  padding: 8px 15px;
+  margin-right: 10px;
+  margin-top:10px;
 
-  a {
-    display: block;
-    cursor: pointer;
-    text-decoration: underline;
-  }
+  cursor: pointer;
+}
+
+.selected {
+  background-color: lightblue;
+}
+
+a {
+  display: block;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+    .fretboard {
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid #000;
+        margin-bottom: 15px;
+        margin-top: 15px;
+
+       
+    }
+
+    .string {
+        display: flex;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .fret {
+      min-width: 20px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        border-right: 1px solid #ccc;
+        position: relative;
+    }
+
+    .fret:first-child {
+        border-left: none; /* Remove left border for fret 0 */
+        border-right: 2px solid #000; /* Set right border for fret 0 */
+        flex: 0.5; /* Make fret 0 less wide */
+    }
+
+    .fret-0 { /* Target the first fret specifically */
+        flex: 0.5; /* Ensure it's less wide if it somehow gets overridden */
+    }
+
+    .note {
+        width: 20px;
+        height: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8em;
+        border: 1px solid #333;
+    }
+
+    .note.highlighted {
+        background-color: lightblue;
+    }
+
+    .fret-numbers {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px 0;
+        font-size: 0.7em;
+        color: #555;
+    }
+
+    .fret-number {
+        flex: 1;
+        text-align: center;
+    }
+
+    .fret-numbers .fret-number:first-child {
+        flex: 0.5; /* Align with the width of fret 0 */
+    }
