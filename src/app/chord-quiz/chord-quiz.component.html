@@ -2,26 +2,55 @@
     <a (click)="showHint = false">Hide hint</a>
     <h3>Trójdźwieki molowe:</h3>
     <p>Pryma - tercja mała - kwinta czysta/tercja wielka od poprzedniego składnika akordu</p>
-
+    <ul>
+        <li>A - A C E</li>
+        <li>A# - A# C# F</li>
+        <li>B - B D F#</li>
+        <li>C - C D# G</li>
+        <li>C# - C# E G#</li>
+        <li>D - D F A</li>
+        <li>D# - D# F# A#</li>
+        <li>E - E G B</li>
+        <li>F - F G# C</li>
+        <li>F# - F# A C#</li>
+        <li>G - G A# D</li>
+        <li>G# - G# B D#</li>
+    </ul>
     <h3>Trójdźwieki durowe:</h3>
     <p>Pryma - tercja wielka - kwinta czysta/tercja mała od poprzedniego składnika akordu</p>
+    <ul>
+        <li>A - A C# E</li>
+        <li>A# - A# D F#</li>
+        <li>B - B D# F#</li>
+        <li>C - C E G</li>
+        <li>C# - C# E# G#</li>
+        <li>D - D F# A</li>
+        <li>D# - D# G A#</li>
+        <li>E - E G# B</li>
+        <li>F - F A C</li>
+        <li>F# - F# A# C#</li>
+        <li>G - G B D</li>
+        <li>G# - G# C D#</li>
+    </ul>
 
 </div>
 <a *ngIf="showHint == false" (click)="showHint = true">Show hint</a>
 
-<hr>
+
 <h2>Identify the Notes in the Chord</h2>
 
 <p>What notes form a <strong>{{ currentRootNote?.name }} {{ currentChordDefinition?.type }}</strong> chord?</p>
 
+<app-freatboard [highlightedNotes]="correctNotes"></app-freatboard>
+
 <div *ngIf="chordOptions.length > 0">
-    <button *ngFor="let option of chordOptions; let i = index" (click)="selectAnswer(option)"
+    <button class="answer-button" *ngFor="let option of chordOptions; let i = index" (click)="selectAnswer(option)"
         [class.selected]="userAnswer === option">
         {{ currentRootNote?.name }} {{ option.notes.slice(1).join(' ') }}
     </button>
 </div>
 
-<button (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
+<button class="submit-button" (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
 
 <p>{{ message }}</p>
 <p>Score: {{ score }}</p>

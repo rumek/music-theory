@@ -4,33 +4,35 @@ import { IntervalQuizComponent } from './interval-quiz/interval-quiz.component';
 import { ChordQuizComponent } from './chord-quiz/chord-quiz.component';
 import { NoteIdentificationQuizComponent } from './note-identification-quiz/note-identification-quiz.component';
 import { ChordIdentificationQuizComponent } from './chord-identification-quiz/chord-identification-quiz.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'interval-quiz',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'interval-quiz',
-    component: IntervalQuizComponent
+    component: IntervalQuizComponent,
   },
   {
     path: 'chord-quiz',
-    component: ChordQuizComponent
+    component: ChordQuizComponent,
   },
   {
     path: 'chord-identitication-quiz',
-    component: ChordIdentificationQuizComponent
+    component: ChordIdentificationQuizComponent,
   },
   {
     path: 'note-identitication-quiz',
-    component: NoteIdentificationQuizComponent
-  }
+    component: NoteIdentificationQuizComponent,
+  },
+  { path: 'statistics', component: StatisticsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

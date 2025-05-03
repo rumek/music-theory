@@ -1,15 +1,43 @@
-<h2>Guess the Sound</h2>
+<div class="quiz-container">
+    <h2>Note Identification Quiz</h2>
 
-<p>Listen to the note and identify it:</p>
-<button (click)="playCurrentNote()">Play Again</button>
 
-<div *ngIf="options.length > 0">
-    <button *ngFor="let option of options" (click)="selectAnswer(option)" [class.selected]="userAnswer === option">
-        {{ option.name }}
-    </button>
+    <div class="mode-selector">
+        <label><input type="radio" name="mode" value="minimal" [(ngModel)]="mode" (change)="setMode('minimal')">
+            Minimal</label>
+        <label><input type="radio" name="mode" value="advanced" [(ngModel)]="mode" (change)="setMode('advanced')">
+            Advanced</label>
+        <label><input type="radio" name="mode" value="custom" [(ngModel)]="mode" (change)="setMode('custom')">
+            Custom</label>
+    </div>
+
+    <div *ngIf="mode === 'custom'" class="note-selector">
+        <p><strong>Select Base Notes (at least 5):</strong></p>
+        <div class="note-checkboxes">
+            <label *ngFor="let note of baseNotes">
+                <input type="checkbox" [checked]="isBaseNoteSelected(note)" (change)="toggleBaseNoteSelection(note)">
+                {{ note }}
+            </label>
+        </div>
+    </div>
+
+    <div class="question-section">
+        <p><strong>What note is this?</strong></p>
+        <button class="answer-button" (click)="playCurrentNote()">🔊 Play Note</button>
+    </div>
+
+    <div class="options">
+        <button class="answer-button" *ngFor="let note of options" (click)="selectAnswer(note)">{{ note.full
+            }}</button>
+    </div>
+
+    <div class="feedback" [ngClass]="{'correct': message === 'Correct!', 'incorrect': message.startsWith('Incorrect')}">
+        <p>{{ message }}</p>
+    </div>
 </div>
 
-<button (click)="submitAnswer()" [disabled]="!userAnswer">Submit Answer</button>
 
-<p>{{ message }}</p>
-<p>Score: {{ score }}</p>
+<div class="scoreboard">
+    <p><strong>Score:</strong> {{ score }}</p>
+    <p><strong>Fails:</strong> {{ fails }}</p>
+</div>

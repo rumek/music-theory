@@ -14,13 +14,12 @@ interface Note {
 @Component({
   selector: 'app-interval-quiz',
   templateUrl: './interval-quiz.component.html',
-  styleUrls: ['./interval-quiz.component.scss']
+  styleUrls: ['./interval-quiz.component.scss'],
 })
 export class IntervalQuizComponent implements OnInit {
   synth: Tone.Synth | undefined;
   showHint = false;
   intervals: Interval[] = [
-    { name: 'pryma', semitones: 0 },
     { name: 'sekunda mała', semitones: 1 },
     { name: 'sekunda wielka', semitones: 2 },
     { name: 'tercja mała', semitones: 3 },
@@ -49,6 +48,9 @@ export class IntervalQuizComponent implements OnInit {
     { name: 'B', value: 11 },
   ];
 
+  guitarStrings: string[] = ['E', 'B', 'G', 'D', 'A', 'E']; // Corrected standard tuning (low to high E)
+  frets: number[] = Array.from({ length: 12 }, (_, i) => i); // Display first 12 frets
+
   currentInterval: Interval | undefined;
   note1: Note | undefined;
   note2: Note | undefined;
@@ -57,16 +59,18 @@ export class IntervalQuizComponent implements OnInit {
   score: number = 0;
   message: string = '';
 
-  ngOnInit(): void {  this.synth = new Tone.Synth().toDestination(); // Create a synthesizer
+  ngOnInit(): void {
+    this.synth = new Tone.Synth().toDestination(); // Create a synthesizer
     this.nextQuestion();
   }
 
   nextQuestion(): void {
-    this.currentInterval = this.intervals[Math.floor(Math.random() * this.intervals.length)];
+    this.currentInterval =
+      this.intervals[Math.floor(Math.random() * this.intervals.length)];
     const rootNoteIndex = Math.floor(Math.random() * this.notes.length);
     this.note1 = this.notes[rootNoteIndex];
     const note2Value = (this.note1.value + this.currentInterval.semitones) % 12;
-    this.note2 = this.notes.find(note => note.value === note2Value);
+    this.note2 = this.notes.find((note) => note.value === note2Value);
 
     // Generate random options, including the correct answer
     this.options = this.generateOptions(this.currentInterval);
@@ -79,7 +83,7 @@ export class IntervalQuizComponent implements OnInit {
     while (options.length < 4) {
       const randomIndex = Math.floor(Math.random() * this.intervals.length);
       const randomInterval = this.intervals[randomIndex];
-      if (!options.some(option => option.name === randomInterval.name)) {
+      if (!options.some((option) => option.name === randomInterval.name)) {
         options.push(randomInterval);
       }
     }
@@ -109,7 +113,7 @@ export class IntervalQuizComponent implements OnInit {
     if (this.note2) {
       // Calculate the actual second note based on the selected interval
       const note2Value = (this.note1!.value + interval.semitones) % 12;
-      const actualNote2 = this.notes.find(note => note.value === note2Value);
+      const actualNote2 = this.notes.find((note) => note.value === note2Value);
       if (actualNote2) {
         this.playNote(actualNote2.name);
       }
@@ -117,7 +121,11 @@ export class IntervalQuizComponent implements OnInit {
   }
 
   submitAnswer(): void {
-    if (this.userAnswer && this.currentInterval && this.userAnswer.name === this.currentInterval.name) {
+    if (
+      this.userAnswer &&
+      this.currentInterval &&
+      this.userAnswer.name === this.currentInterval.name
+    ) {
       this.message = 'Correct!';
       this.score++;
     } else {

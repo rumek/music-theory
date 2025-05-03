@@ -1,0 +1,28 @@
+<div class="statistics-container">
+  <h2>Quiz Statistics</h2>
+
+  <button (click)="clearStats()">Clear All</button>
+
+  <table *ngIf="stats.length > 0; else noStats">
+    <thead>
+      <tr>
+        <th>Quiz Name</th>
+        <th>Score</th>
+        <th>Time (s)</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stat of stats">
+        <td>{{ stat.quizName }}</td>
+        <td>{{ stat.score }}</td>
+        <td>{{ stat.timeTakenInSeconds }}</td>
+        <td>{{ stat.timestamp | date : "medium" }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noStats>
+    <p>No statistics available.</p>
+  </ng-template>
+</div>
